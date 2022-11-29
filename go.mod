@@ -1,4 +1,4 @@
-module github.com/nvh0412/employmenthero
+module github.com/Thinkei/employmenthero-go
 
 go 1.19
 

@@ -16,7 +16,7 @@ type Client struct {
 	Secret      string
 	RedirectURI string
 	APIBase     string
-	Client      *http.Client
+	Client      HTTPClient
 	Token       *TokenResponse
 }
 
@@ -24,11 +24,15 @@ type TokenResponse struct {
 	RefreshToken string `json:"refresh_token"`
 	Token        string `json:"access_token"`
 	Type         string `json:"token_type"`
-	ExpiresIn    int64  `json:"expires_in"`
+	ExpiresIn    int  `json:"expires_in"`
 }
 
 type ErrorResponse struct {
 	Response *http.Response
+}
+
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
 }
 
 // NewClient returns a new Client struct
