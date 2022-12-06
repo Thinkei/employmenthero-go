@@ -9,35 +9,12 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 )
 
-type Client struct {
-	ClientID    string
-	Secret      string
-	RedirectURI string
-	APIBase     string
-	Client      HTTPClient
-	Token       *TokenResponse
-}
-
-type TokenResponse struct {
-	RefreshToken string `json:"refresh_token"`
-	Token        string `json:"access_token"`
-	Type         string `json:"token_type"`
-	ExpiresIn    int  `json:"expires_in"`
-}
-
-type ErrorResponse struct {
-	Response *http.Response
-}
-
-type HTTPClient interface {
-	Do(req *http.Request) (*http.Response, error)
-}
-
 // NewClient returns a new Client struct
-func NewClient(clientID string, secret string, refreshToken string, APIBase string) (*Client, error) {
-	if clientID == "" || secret == "" || APIBase == "" || refreshToken == "" {
+func NewClient(clientID, secret, refreshToken, OAuthBase, APIBase string) (*Client, error) {
+	if clientID == "" || secret == "" || APIBase == "" || OAuthBase == "" || refreshToken == "" {
 		return nil, errors.New("Client ID, Secret and APIBase are required to create a Client")
 	}
 
@@ -47,6 +24,7 @@ func NewClient(clientID string, secret string, refreshToken string, APIBase stri
 		Secret:   secret,
 		Token:    &TokenResponse{RefreshToken: refreshToken},
 		APIBase:  APIBase,
+		OAuthBase:  OAuthBase,
 	}, nil
 }
 
@@ -58,7 +36,7 @@ func (c *Client) GetAccessToken(ctx context.Context) (*TokenResponse, error) {
 	data.Set("grant_type", "refresh_token")
 
 	buf := bytes.NewBuffer([]byte(data.Encode()))
-	req, err := http.NewRequestWithContext(ctx, "POST", fmt.Sprintf("%s%s", c.APIBase, "/oauth2/token"), buf)
+	req, err := http.NewRequestWithContext(ctx, "POST", fmt.Sprintf("%s%s", c.OAuthBase, "/oauth2/token"), buf)
 	if err != nil {
 		return &TokenResponse{}, err
 	}
@@ -71,6 +49,8 @@ func (c *Client) GetAccessToken(ctx context.Context) (*TokenResponse, error) {
 
 	if response.Token != "" {
 		c.Token = response
+		c.tokenExpiresAt = time.Now().Add(time.Duration(response.ExpiresIn) * time.Second)
+		fmt.Println(c.tokenExpiresAt)
 	}
 
 	return response, err
@@ -117,4 +97,32 @@ func (c *Client) Send(req *http.Request, v interface{}) error {
 	}
 
 	return json.NewDecoder(resp.Body).Decode(v)
+}
+
+func (c *Client) SendWithAuth(req *http.Request, v interface{}) error {
+	if c.Token != nil {
+		if !c.tokenExpiresAt.IsZero() && c.tokenExpiresAt.Sub(time.Now()) < RequestNewTokenBeforeExpiresIn {
+			if _, err := c.GetAccessToken(req.Context()); err != nil {
+				return err
+			}
+		}
+
+		req.Header.Set("Authorization", "Bearer "+c.Token.Token)
+	}
+
+	return c.Send(req, v)
+}
+
+func (c *Client) NewRequest(ctx context.Context, method, url string, payload interface{}) (*http.Request, error) {
+	var buf io.Reader
+	if payload != nil {
+		b, err := json.Marshal(&payload)
+		fmt.Println(payload)
+		if err != nil {
+			return nil, err
+		}
+
+		buf = bytes.NewBuffer(b)
+	}
+	return http.NewRequestWithContext(ctx, method, url, buf)
 }
