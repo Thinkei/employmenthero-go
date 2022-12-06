@@ -11,9 +11,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var testClientID = "AXy9orp-CDaHhBZ9C78QHW2BKZpACgroqo85"
+var testClientID = "AXy9orp"
 var testSecret = "UgS2iCw"
-var refreshToken = "w+12axYWx2UgS2iCw"
+var refreshToken = "w+123jkvsk"
 var oauthBase = "https://oauth.eh.com"
 var apiBase = "https://api.eh.com"
 
