@@ -14,11 +14,18 @@ c, err := employmenthero.NewClient("clientID", "secretID", "refreshToken", "OAut
 accessToken, err := c.GetAccessToken(context.TODO())
 ```
 
-## Get Organisations
+## List Organisations
 
 ```go
 response, err := c.ListOrganisations(context.TODO(), OrganisationListParams{})
 organistaions := response.Data.Items
+```
+
+## Get Organisation details
+
+```go
+response, err := c.GetOrganisation(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx")
+organistaion := response.Data
 ```
 
 ## How to Contribute

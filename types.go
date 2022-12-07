@@ -44,15 +44,34 @@ type (
 	ListResponse struct {
 		PageIndex   int `json:"page_index"`
 		ItemPerPage int `json:"item_per_page"`
-		TotalPages int `json:"total_pages"`
-		TotalItems int `json:"total_items"`
+		TotalPages  int `json:"total_pages"`
+		TotalItems  int `json:"total_items"`
 	}
 
 	Organisation struct {
-		Id string `json:"id"`
-		Name string `json:"name"`
-		Phone string `json:"phone"`
+		Id      string `json:"id"`
+		Name    string `json:"name"`
+		Phone   string `json:"phone"`
 		Country string `json:"country"`
 		LogoURL string `json:"logo_url"`
+	}
+
+	OrganisationDetail struct {
+		Id                    string   `json:"id"`
+		Name                  string   `json:"name"`
+		Phone                 string   `json:"phone"`
+		Country               string   `json:"country"`
+		LogoURL               string   `json:"logo_url"`
+		PrimaryAddress        string   `json:"primary_address"`
+		EndOfWeek             string   `json:"end_of_week"`
+		TypicalWorkDay        string   `json:"typical_work_day"`
+		PayrollAdminEmails    []string `json:"payroll_admin_emails"`
+		SubscriptionPlan      string   `json:"subscription_plan"`
+		SuperfundName         string   `json:"superfund_name"`
+		EmployeesCount        int      `json:"employees_count"`
+		ActiveEmployeesCount  int      `json:"active_employees_count"`
+		PendingEmployeesCount int      `json:"pending_employees_count"`
+		TimeZone              string   `json:"time_zone"`
+		CreatedAt             string   `json:"created_at"`
 	}
 )
