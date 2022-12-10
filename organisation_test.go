@@ -26,7 +26,7 @@ func TestListOrganisation(t *testing.T) {
 		}, nil
 	}
 
-	response, err := c.ListOrganisations(context.TODO(), OrganisationListParams{})
+	response, err := c.ListOrganisations(context.TODO(), ListParams{})
 
 	assert.Equal(t, response.Data.ItemPerPage, 20)
 	assert.Equal(t, response.Data.PageIndex, 1)
