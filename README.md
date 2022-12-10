@@ -17,7 +17,7 @@ accessToken, err := c.GetAccessToken(context.TODO())
 ## List Organisations
 
 ```go
-response, err := c.ListOrganisations(context.TODO(), OrganisationListParams{})
+response, err := c.ListOrganisations(context.TODO(), ListParams{})
 organistaions := response.Data.Items
 ```
 
@@ -26,6 +26,20 @@ organistaions := response.Data.Items
 ```go
 response, err := c.GetOrganisation(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx")
 organistaion := response.Data
+```
+
+## List Employees
+
+```go
+response, err := c.ListEmployees(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", ListParams{})
+employees := response.Data.Items
+```
+
+## Get Employee details
+
+```go
+response, err := c.GetEmployee(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "90a34ef1-50e4-4930-a9d6-yyyy")
+employee := response.Data
 ```
 
 ## How to Contribute

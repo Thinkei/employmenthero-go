@@ -74,4 +74,44 @@ type (
 		TimeZone              string   `json:"time_zone"`
 		CreatedAt             string   `json:"created_at"`
 	}
+
+	BasicData struct {
+		Id   string `json:"id"`
+		Name string `json:"name"`
+	}
+
+	Employee struct {
+		Id                   string      `json:"id"`
+		AccountEmail         string      `json:"account_email"`
+		Title                string      `json:"title"`
+		Role                 string      `json:"role"`
+		FirstName            string      `json:"first_name"`
+		LastName             string      `json:"last_name"`
+		MiddleName           string      `json:"MiddleName"`
+		Address              string      `json:"address"`
+		AvatarURL            string      `json:"avatar_url"`
+		KnownAs              string      `json:"known_as"`
+		JobTitle             string      `json:"job_title"`
+		Gender               string      `json:"gender"`
+		Country              string      `json:"country"`
+		Nationality          string      `json:"nationality"`
+		DateOfBirth          string      `json:"date_of_birth"`
+		MartialStatus        string      `json:"martial_status"`
+		PersonalEmail        string      `json:"personal_email"`
+		PersonalMobileNumber string      `json:"personal_mobile_number"`
+		HomePhone            string      `json:"home_phone"`
+		EmployingEntity      string      `json:"employing_entity"`
+		Code                 string      `json:"code"`
+		Location             string      `json:"location"`
+		CompanyEmail         string      `json:"company_email"`
+		CompanyNumber        string      `json:"company_number"`
+		CompanyLandline      string      `json:"company_landline"`
+		StartDate            string      `json:"start_date"`
+		TerminationDate      string      `json:"termination_date"`
+		PrimaryCostCentre    BasicData   `json:"primary_cost_centre"`
+		SecondaryCostCentres []BasicData `json:"secondary_cost_centres"`
+		PrimaryManager       BasicData   `json:"primary_manager"`
+		SecondaryManager     BasicData   `json:"secondary_manager"`
+		ExternalId           string      `json:"external_id"`
+	}
 )

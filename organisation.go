@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-type OrganisationListParams struct {
-	ListParams
-}
-
 type OrganisationData struct {
 	Items []Organisation `json:"items"`
 	ListResponse
@@ -19,7 +15,7 @@ type OrganisationListResponse struct {
 	Data OrganisationData `json:"data"`
 }
 
-func (c *Client) ListOrganisations(ctx context.Context, op OrganisationListParams) (*OrganisationListResponse, error) {
+func (c *Client) ListOrganisations(ctx context.Context, op ListParams) (*OrganisationListResponse, error) {
 	req, err := c.NewRequest(ctx, http.MethodGet, fmt.Sprintf("%s/api/v1/organisations", c.APIBase), nil)
 
 	if err != nil {
