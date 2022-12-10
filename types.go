@@ -114,4 +114,17 @@ type (
 		SecondaryManager     BasicData   `json:"secondary_manager"`
 		ExternalId           string      `json:"external_id"`
 	}
+
+	LeaveRequest struct {
+		Id                 string  `json:"id"`
+		StartDate          string  `json:"start_date"`
+		EndDate            string  `json:"end_date"`
+		TotalHours         float32 `json:"total_hours"`
+		Comment            string  `json:"comment"`
+		Status             string  `json:"status"`
+		LeaveBalanceAmount float32 `json:"leave_balance_amount"`
+		LeaveCategoryName  string  `json:"leave_category_name"`
+		Reason             string  `json:"reason"`
+		EmployeeId         string  `json:"employee_id"`
+	}
 )

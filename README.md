@@ -42,6 +42,20 @@ response, err := c.GetEmployee(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "
 employee := response.Data
 ```
 
+## List Leave Requests
+
+```go
+response, err := c.ListLeaveRequests(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", ListParams{})
+leaveRequests := response.Data.Items
+```
+
+## Get Leave Request details
+
+```go
+response, err := c.GetLeaveRequest(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "90a34ef1-50e4-4930-a9d6-yyyy")
+leaveRequest := response.Data
+```
+
 ## How to Contribute
 
 - Create an issue to describe what you want to do
