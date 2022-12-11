@@ -56,6 +56,13 @@ response, err := c.GetLeaveRequest(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx
 leaveRequest := response.Data
 ```
 
+## List Timesheet Entries
+
+```go
+response, err := c.ListTimesheetEntries(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "-", ListParams{})
+timesheetEntries := response.Data.Items
+```
+
 ## How to Contribute
 
 - Create an issue to describe what you want to do
