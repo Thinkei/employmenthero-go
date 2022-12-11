@@ -127,4 +127,18 @@ type (
 		Reason             string  `json:"reason"`
 		EmployeeId         string  `json:"employee_id"`
 	}
+
+	Timesheet struct {
+		Id         string    `json:"id"`
+		EmployeeId string    `json:"employee_id"`
+		Date       string    `json:"date"`
+		StartTime  string    `json:"start_time"`
+		EndTime    string    `json:"end_time"`
+		Status     string    `json:"status"`
+		Units      float32   `json:"units"`
+		Reason     string    `json:"reason"`
+		Comment    string    `json:"comment"`
+		Time       int       `json:"time"`
+		CostCentre BasicData `json:"cost_centre"`
+	}
 )
