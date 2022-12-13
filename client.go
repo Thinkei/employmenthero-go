@@ -101,7 +101,7 @@ func (c *Client) Send(req *http.Request, v interface{}) error {
 
 func (c *Client) SendWithAuth(req *http.Request, v interface{}) error {
 	if c.Token != nil {
-		if !c.tokenExpiresAt.IsZero() && c.tokenExpiresAt.Sub(time.Now()) < RequestNewTokenBeforeExpiresIn {
+		if !c.tokenExpiresAt.IsZero() && time.Until(c.tokenExpiresAt) < RequestNewTokenBeforeExpiresIn {
 			if _, err := c.GetAccessToken(req.Context()); err != nil {
 				return err
 			}
