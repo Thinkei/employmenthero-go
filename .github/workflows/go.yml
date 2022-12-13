@@ -32,8 +32,6 @@ jobs:
          go:
            - "1.19"
            - "1.18"
-           - "1.17"
-           - "1.16"
      name: "Test: go v${{ matrix.go }}"
      steps:
        - uses: actions/checkout@v2
