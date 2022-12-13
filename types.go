@@ -143,26 +143,35 @@ type (
 	}
 
 	EmploymentHistory struct {
-		Id string `json:"id"`
-		Title string `json:"title"`
-		StartDate string `json:"start_date"`
-		EndDate string `json:"end_date"`
+		Id             string `json:"id"`
+		Title          string `json:"title"`
+		StartDate      string `json:"start_date"`
+		EndDate        string `json:"end_date"`
 		EmploymentType string `json:"employment_type"`
 	}
 
 	EmergencyContact struct {
-		Id int `json:"id"`
-		ContactName string `json:"contact_name"`
+		Id                   int    `json:"id"`
+		ContactName          string `json:"contact_name"`
 		DaytimeContactNumber string `json:"daytime_contact_number"`
-		AfterHoursNo string `json:"after_hours_no"`
-		AfterMobileNo string `json:"after_mobile_no"`
-		Relationship string `json:"relationship"`
-		ContactType string `json:"contact_type"`
+		AfterHoursNo         string `json:"after_hours_no"`
+		AfterMobileNo        string `json:"after_mobile_no"`
+		Relationship         string `json:"relationship"`
+		ContactType          string `json:"contact_type"`
 	}
 
 	Team struct {
-		Id string `json:"id"`
-		Name string `json:"name"`
+		Id     string `json:"id"`
+		Name   string `json:"name"`
 		Status string `json:"status"`
+	}
+
+	BankAccount struct {
+		Id             string `json:"id"`
+		AccountName    string `json:"account_name"`
+		AccountNumber  string `json:"account_number"`
+		Bsb            string `json:"bsb"`
+		Amount         string `json:"amount"`
+		PrimaryAccount bool   `json:"primary_account"`
 	}
 )

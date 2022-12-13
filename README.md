@@ -1,7 +1,7 @@
 ![main workflow](https://github.com/Thinkei/employmenthero-go/actions/workflows/go.yml/badge.svg)
 
 # Go client for EmploymentHero REST API
-The official [EmploymentHero][https://developer.employmenthero.com/] Go client library.
+The official EmploymentHero Go client library.
 
 ## Requirements
 
@@ -93,6 +93,13 @@ teams := response.Data.Items
 ```go
 response, err := c.ListEmployeesByTeam(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXXX-YYYY-ZZZZ", ListParams{})
 employees := response.Data.Items
+```
+
+## List Bank Accounts
+
+```go
+response, err := c.ListBankAccounts(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+bankAccounts := response.Data.Items
 ```
 
 ## Development
