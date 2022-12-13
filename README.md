@@ -102,6 +102,13 @@ response, err := c.ListBankAccounts(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxx
 bankAccounts := response.Data.Items
 ```
 
+## Get Tax Declaration of 1 Employee
+
+```go
+response, err := c.GetTaxDeclaration(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+taxDeclaration := response.Data
+```
+
 ## Development
 
 Pull requests from the community are welcome. If you submit one, please keep

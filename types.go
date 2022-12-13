@@ -174,4 +174,16 @@ type (
 		Amount         string `json:"amount"`
 		PrimaryAccount bool   `json:"primary_account"`
 	}
+
+	TaxDeclaration struct {
+		FirstName string `json:"first_name"`
+		LastName string `json:"last_name"`
+		TaxFileNumber string `json:"tax_file_number"`
+		TaxAuResident bool `json:"tax_au_resident"`
+		TaxForeignResident bool `json:"tax_foreign_resident"`
+		WorkingHolidayMaker bool `json:"working_holiday_maker"`
+		TaxFree bool `json:"tax_free"`
+		TaxHelpDebt bool `json:"tax_help_debt"`
+		TaxFinancialSupplementDebt bool `json:"tax_financial_supplement_debt"`
+	}
 )
