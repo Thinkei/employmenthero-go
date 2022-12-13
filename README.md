@@ -77,6 +77,20 @@ response, err := c.ListEmergencyContacts(context.TODO(), "90a34ef1-50e4-4930-a9d
 contacts := response.Data.Items
 ```
 
+## List Teams
+
+```go
+response, err := c.ListTeams(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", ListParams{})
+teams := response.Data.Items
+```
+
+## List Employees by Team
+
+```go
+response, err := c.ListEmployeesByTeam(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXXX-YYYY-ZZZZ", ListParams{})
+employees := response.Data.Items
+```
+
 ## How to Contribute
 
 - Create an issue to describe what you want to do

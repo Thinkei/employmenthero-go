@@ -159,4 +159,10 @@ type (
 		Relationship string `json:"relationship"`
 		ContactType string `json:"contact_type"`
 	}
+
+	Team struct {
+		Id string `json:"id"`
+		Name string `json:"name"`
+		Status string `json:"status"`
+	}
 )
