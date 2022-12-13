@@ -1,7 +1,11 @@
 ![main workflow](https://github.com/Thinkei/employmenthero-go/actions/workflows/go.yml/badge.svg)
 
 # Go client for EmploymentHero REST API
-This repository contains a Go package for the client-side components of the EmploymentHero APIs
+The official [EmploymentHero][https://developer.employmenthero.com/] Go client library.
+
+## Requirements
+
+- Go 1.16 or later
 
 ## Usage
 
@@ -91,13 +95,13 @@ response, err := c.ListEmployeesByTeam(context.TODO(), "90a34ef1-50e4-4930-a9d6-
 employees := response.Data.Items
 ```
 
-## How to Contribute
+## Development
 
-- Create an issue to describe what you want to do
-- Fork a repository
-- Add/Fix something
-- Check that tests are passing
-- Create PR
+Pull requests from the community are welcome. If you submit one, please keep
+the following guidelines in mind:
+
+1. Code must be `go fmt` compliant.
+3. Ensure that `go test` succeeds.
 
 ## Tests
 
