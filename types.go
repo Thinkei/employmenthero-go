@@ -141,4 +141,12 @@ type (
 		Time       int       `json:"time"`
 		CostCentre BasicData `json:"cost_centre"`
 	}
+
+	EmploymentHistory struct {
+		Id string `json:"id"`
+		Title string `json:"title"`
+		StartDate string `json:"start_date"`
+		EndDate string `json:"end_date"`
+		EmploymentType string `json:"employment_type"`
+	}
 )

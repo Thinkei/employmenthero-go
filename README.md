@@ -63,6 +63,13 @@ response, err := c.ListTimesheetEntries(context.TODO(), "90a34ef1-50e4-4930-a9d6
 timesheetEntries := response.Data.Items
 ```
 
+## List Employemnt Histories
+
+```go
+response, err := c.ListEmploymentHistories(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "-", ListParams{})
+employmentHistories := response.Data.Items
+```
+
 ## How to Contribute
 
 - Create an issue to describe what you want to do
