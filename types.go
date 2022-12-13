@@ -149,4 +149,14 @@ type (
 		EndDate string `json:"end_date"`
 		EmploymentType string `json:"employment_type"`
 	}
+
+	EmergencyContact struct {
+		Id int `json:"id"`
+		ContactName string `json:"contact_name"`
+		DaytimeContactNumber string `json:"daytime_contact_number"`
+		AfterHoursNo string `json:"after_hours_no"`
+		AfterMobileNo string `json:"after_mobile_no"`
+		Relationship string `json:"relationship"`
+		ContactType string `json:"contact_type"`
+	}
 )

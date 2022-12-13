@@ -66,8 +66,15 @@ timesheetEntries := response.Data.Items
 ## List Employemnt Histories
 
 ```go
-response, err := c.ListEmploymentHistories(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "-", ListParams{})
+response, err := c.ListEmploymentHistories(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "xxxxxx-yyyy", ListParams{})
 employmentHistories := response.Data.Items
+```
+
+## List Emergency Contacts
+
+```go
+response, err := c.ListEmergencyContacts(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "xxxx-yyy", ListParams{})
+contacts := response.Data.Items
 ```
 
 ## How to Contribute
