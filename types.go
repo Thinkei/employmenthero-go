@@ -176,14 +176,27 @@ type (
 	}
 
 	TaxDeclaration struct {
-		FirstName string `json:"first_name"`
-		LastName string `json:"last_name"`
-		TaxFileNumber string `json:"tax_file_number"`
-		TaxAuResident bool `json:"tax_au_resident"`
-		TaxForeignResident bool `json:"tax_foreign_resident"`
-		WorkingHolidayMaker bool `json:"working_holiday_maker"`
-		TaxFree bool `json:"tax_free"`
-		TaxHelpDebt bool `json:"tax_help_debt"`
-		TaxFinancialSupplementDebt bool `json:"tax_financial_supplement_debt"`
+		FirstName                  string `json:"first_name"`
+		LastName                   string `json:"last_name"`
+		TaxFileNumber              string `json:"tax_file_number"`
+		TaxAuResident              bool   `json:"tax_au_resident"`
+		TaxForeignResident         bool   `json:"tax_foreign_resident"`
+		WorkingHolidayMaker        bool   `json:"working_holiday_maker"`
+		TaxFree                    bool   `json:"tax_free"`
+		TaxHelpDebt                bool   `json:"tax_help_debt"`
+		TaxFinancialSupplementDebt bool   `json:"tax_financial_supplement_debt"`
+	}
+
+	SuperannuationDetail struct {
+		FundName                 string `json:"fund_name"`
+		MemberNumber             string `json:"member_number"`
+		ProductCode              string `json:"product_code"`
+		EmployerNominatedFund    bool   `json:"employer_nominated_fund"`
+		FundAbn                  string `json:"fund_abn"`
+		ElectronicServiceAddress string `json:"electronic_service_address"`
+		FundEmail                string `json:"fund_email"`
+		AccountName              string `json:"account_name"`
+		AccountBSB               string `json:"account_bsb"`
+		AccountNumber            string `json:"account_number"`
 	}
 )
