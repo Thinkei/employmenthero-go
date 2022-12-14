@@ -116,6 +116,13 @@ response, err := c.GetSuperannuationDetail(context.TODO(), "90a34ef1-50e4-4930-a
 superannuationDetail := response.Data
 ```
 
+## List Pay Details
+
+```go
+response, err := c.ListPayDetails(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+payDetails := response.Data.Items
+```
+
 ## Development
 
 Pull requests from the community are welcome. If you submit one, please keep

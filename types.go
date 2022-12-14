@@ -199,4 +199,20 @@ type (
 		AccountBSB               string `json:"account_bsb"`
 		AccountNumber            string `json:"account_number"`
 	}
+
+	PayDetail struct {
+		Id                     string  `json:"id"`
+		EffectiveFrom          string  `json:"effective_from"`
+		Classification         string  `json:"classification"`
+		IndustrialInstrument   string  `json:"industrial_instrument"`
+		PayRateTemplate        string  `json:"pay_rate_template"`
+		AnniversaryDate        string  `json:"anniversary_date"`
+		Salary                 float32 `json:"salary"`
+		SalaryType             string  `json:"salary_type"`
+		PayUnit                string  `json:"pay_unit"`
+		PayCategory            string  `json:"pay_category"`
+		LeaveAllowanceTemplate string  `json:"leave_allowance_template"`
+		ChangeReason           string  `json:"change_reason"`
+		Comments               string  `json:"comments"`
+	}
 )
