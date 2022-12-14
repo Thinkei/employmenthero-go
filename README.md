@@ -1,4 +1,4 @@
-![main workflow](https://github.com/Thinkei/employmenthero-go/actions/workflows/go.yml/badge.svg)
+![main workflow](https://github.com/Thinkei/employmenthero-go/actions/workflows/go.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/Thinkei/employmenthero-go/badge.svg?t=ygC26U)](https://coveralls.io/github/Thinkei/employmenthero-go)
 
 # Go client for EmploymentHero REST API
 The official EmploymentHero Go client library.

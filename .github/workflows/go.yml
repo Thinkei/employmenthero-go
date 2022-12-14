@@ -25,7 +25,7 @@ jobs:
       - name: lint
         run: |
           go install honnef.co/go/tools/cmd/staticcheck@latest &&
-          $HOME/go/bin/staticcheck && go vet ./...
+          $HOME/go/bin/staticcheck && make vet
 
   test:
      runs-on: ci-general
@@ -42,4 +42,10 @@ jobs:
          with:
            go-version: ${{ matrix.go }}
        - name: Test
-         run: go test -v .
+         run: make test
+       - name: Coveralls
+         run: make coverage && make coveralls
+         if: matrix.go == '1.18'
+         env:
+           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           COVERALLS_FLAG_NAME: Go-${{ matrix.go }}
