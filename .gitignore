@@ -1,0 +1,4 @@
+*.coverprofile
+/.idea
+.env
+.DS_Store
