@@ -222,10 +222,30 @@ type (
 		Type string `json:"type"`
 	}
 
+	EmployeeCertification struct {
+		Id              string `json:"id"`
+		Name            string `json:"name"`
+		CertificationId string `json:"certification_id"`
+		Type            string `json:"type"`
+		ExpiryDate      string `json:"expiry_date"`
+		CompletionDate  string `json:"completion_date"`
+		DriverProblem   bool   `json:"driver_problem"`
+		DriverDetails   string `json:"driver_details"`
+		Status          string `json:"status"`
+		Reason          string `json:"reason"`
+	}
+
 	Policy struct {
 		Id        string `json:"id"`
 		Name      string `json:"name"`
 		Induction bool   `json:"induction"`
 		CreatedAt string `json:"created_at"`
+	}
+
+	Payslip struct {
+		Id             string `json:"id"`
+		FirstName      string `json:"first_name"`
+		LastName       string `json:"last_name"`
+		TotalDeduction int    `json:"total_deduction"`
 	}
 )
