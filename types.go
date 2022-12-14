@@ -176,14 +176,56 @@ type (
 	}
 
 	TaxDeclaration struct {
-		FirstName string `json:"first_name"`
-		LastName string `json:"last_name"`
-		TaxFileNumber string `json:"tax_file_number"`
-		TaxAuResident bool `json:"tax_au_resident"`
-		TaxForeignResident bool `json:"tax_foreign_resident"`
-		WorkingHolidayMaker bool `json:"working_holiday_maker"`
-		TaxFree bool `json:"tax_free"`
-		TaxHelpDebt bool `json:"tax_help_debt"`
-		TaxFinancialSupplementDebt bool `json:"tax_financial_supplement_debt"`
+		FirstName                  string `json:"first_name"`
+		LastName                   string `json:"last_name"`
+		TaxFileNumber              string `json:"tax_file_number"`
+		TaxAuResident              bool   `json:"tax_au_resident"`
+		TaxForeignResident         bool   `json:"tax_foreign_resident"`
+		WorkingHolidayMaker        bool   `json:"working_holiday_maker"`
+		TaxFree                    bool   `json:"tax_free"`
+		TaxHelpDebt                bool   `json:"tax_help_debt"`
+		TaxFinancialSupplementDebt bool   `json:"tax_financial_supplement_debt"`
+	}
+
+	SuperannuationDetail struct {
+		FundName                 string `json:"fund_name"`
+		MemberNumber             string `json:"member_number"`
+		ProductCode              string `json:"product_code"`
+		EmployerNominatedFund    bool   `json:"employer_nominated_fund"`
+		FundAbn                  string `json:"fund_abn"`
+		ElectronicServiceAddress string `json:"electronic_service_address"`
+		FundEmail                string `json:"fund_email"`
+		AccountName              string `json:"account_name"`
+		AccountBSB               string `json:"account_bsb"`
+		AccountNumber            string `json:"account_number"`
+	}
+
+	PayDetail struct {
+		Id                     string  `json:"id"`
+		EffectiveFrom          string  `json:"effective_from"`
+		Classification         string  `json:"classification"`
+		IndustrialInstrument   string  `json:"industrial_instrument"`
+		PayRateTemplate        string  `json:"pay_rate_template"`
+		AnniversaryDate        string  `json:"anniversary_date"`
+		Salary                 float32 `json:"salary"`
+		SalaryType             string  `json:"salary_type"`
+		PayUnit                string  `json:"pay_unit"`
+		PayCategory            string  `json:"pay_category"`
+		LeaveAllowanceTemplate string  `json:"leave_allowance_template"`
+		ChangeReason           string  `json:"change_reason"`
+		Comments               string  `json:"comments"`
+	}
+
+	Certification struct {
+		Id   string `json:"id"`
+		Name string `json:"name"`
+		Type string `json:"type"`
+	}
+
+	Policy struct {
+		Id        string `json:"id"`
+		Name      string `json:"name"`
+		Induction bool   `json:"induction"`
+		CreatedAt string `json:"created_at"`
 	}
 )

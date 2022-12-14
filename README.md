@@ -109,6 +109,34 @@ response, err := c.GetTaxDeclaration(context.TODO(), "90a34ef1-50e4-4930-a9d6-xx
 taxDeclaration := response.Data
 ```
 
+## Get Superannuation Detail of 1 Employee
+
+```go
+response, err := c.GetSuperannuationDetail(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+superannuationDetail := response.Data
+```
+
+## List Pay Details
+
+```go
+response, err := c.ListPayDetails(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+payDetails := response.Data.Items
+```
+
+## List Certification
+
+```go
+response, err := c.ListCertifications(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", ListParams{})
+certifications := response.Data.Items
+```
+
+## List Policies
+
+```go
+response, err := c.ListPolicies(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", ListParams{})
+policies := response.Data.Items
+```
+
 ## Development
 
 Pull requests from the community are welcome. If you submit one, please keep
