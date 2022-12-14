@@ -144,6 +144,13 @@ response, err := c.ListEmployeeCertifications(context.TODO(), "90a34ef1-50e4-493
 employeeCertifications := response.Data.Items
 ```
 
+## List Payslips
+
+```go
+response, err := c.ListPayslips(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+payslips := response.Data.Items
+```
+
 ## Development
 
 Pull requests from the community are welcome. If you submit one, please keep
