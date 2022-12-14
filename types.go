@@ -215,4 +215,10 @@ type (
 		ChangeReason           string  `json:"change_reason"`
 		Comments               string  `json:"comments"`
 	}
+
+	Certification struct {
+		Id   string `json:"id"`
+		Name string `json:"name"`
+		Type string `json:"type"`
+	}
 )

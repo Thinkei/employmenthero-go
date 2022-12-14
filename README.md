@@ -123,6 +123,13 @@ response, err := c.ListPayDetails(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx"
 payDetails := response.Data.Items
 ```
 
+## List Certification
+
+```go
+response, err := c.ListCertifications(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", ListParams{})
+certifications := response.Data.Items
+```
+
 ## Development
 
 Pull requests from the community are welcome. If you submit one, please keep
