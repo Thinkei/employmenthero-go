@@ -222,10 +222,47 @@ type (
 		Type string `json:"type"`
 	}
 
+	EmployeeCertification struct {
+		Id              string `json:"id"`
+		Name            string `json:"name"`
+		CertificationId string `json:"certification_id"`
+		Type            string `json:"type"`
+		ExpiryDate      string `json:"expiry_date"`
+		CompletionDate  string `json:"completion_date"`
+		DriverProblem   bool   `json:"driver_problem"`
+		DriverDetails   string `json:"driver_details"`
+		Status          string `json:"status"`
+		Reason          string `json:"reason"`
+	}
+
 	Policy struct {
 		Id        string `json:"id"`
 		Name      string `json:"name"`
 		Induction bool   `json:"induction"`
 		CreatedAt string `json:"created_at"`
+	}
+
+	Payslip struct {
+		Id               string  `json:"id"`
+		FirstName        string  `json:"first_name"`
+		LastName         string  `json:"last_name"`
+		TotalDeduction   int     `json:"total_deduction"`
+		NetPay           float32 `json:"net_pay"`
+		Super            float32 `json:"super"`
+		Wages            float32 `json:"wages"`
+		Reimbursements   float32 `json:"reimbursements"`
+		Tax              float32 `json:"tax"`
+		Name             string  `json:"name"`
+		AddressLine1     string  `json:"address_line1"`
+		AddressLine2     string  `json:"address_line2"`
+		Suburb           string  `json:"suburb"`
+		Postcode         string  `json:"postcode"`
+		PostTaxDeduction float32 `json:"post_tax_deduction"`
+		PreTaxDeduction  float32 `json:"pre_tax_deduction"`
+		BaseRate         float32 `json:"base_rate"`
+		HourlyRate       float32 `json:"hourly_rate"`
+		BaseRateUnit     string  `json:"base_rate_unit"`
+		EmploymentType   string  `json:"employment_type"`
+		PaymentDate      string  `json:"payment_date"`
 	}
 )
