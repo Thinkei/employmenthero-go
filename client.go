@@ -28,6 +28,11 @@ func NewClient(clientID, secret, refreshToken, OAuthBase, APIBase string) (*Clie
 	}, nil
 }
 
+// SetLog will set/change the output destination.
+func (c *Client) SetLog(log io.Writer) {
+	c.Log = log
+}
+
 func (c *Client) GetAccessToken(ctx context.Context) (*TokenResponse, error) {
 	data := url.Values{}
 	data.Set("client_id", c.ClientID)
@@ -73,6 +78,7 @@ func (c *Client) Send(req *http.Request, v interface{}) error {
 	}
 
 	resp, err = c.Client.Do(req)
+	c.log(req, resp)
 
 	if err != nil {
 		return err
@@ -126,3 +132,19 @@ func (c *Client) NewRequest(ctx context.Context, method, url string, payload int
 	}
 	return http.NewRequestWithContext(ctx, method, url, buf)
 }
+
+func (c *Client) log(r *http.Request, resp *http.Response) {
+	if c.Log == nil { return }
+
+	var (
+		reqDump string
+		respDump []byte
+	)
+
+	if r != nil {
+		reqDump = fmt.Sprintf("%s %s. Data: %s", r.Method, r.URL.String(), r.Form.Encode())
+	}
+
+	c.Log.Write([]byte(fmt.Sprintf("Request: %s\nResponse: %s\n", reqDump, string(respDump))))
+}
+
