@@ -1,0 +1,45 @@
+version: 2.1
+
+executors:
+  go-docker:
+    parameters:
+      version:
+        default: "1.16"
+        type: string
+    docker:
+      - image: cimg/go:<<parameters.version>>
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/go:1.18.4
+    steps:
+      - checkout
+      - run:
+          name: Check go vet
+          command: |
+            go install honnef.co/go/tools/cmd/staticcheck@latest && $HOME/go/bin/staticcheck && make vet
+  test:
+    parameters:
+      version:
+        default: "1.16"
+        type: string
+    executor:
+      name: go-docker
+      version: <<parameters.version>>
+    steps:
+      - checkout
+      - run:
+          name: Run go test
+          command:  |
+            make test
+
+workflows:
+  version: 2
+  lint_and_test:
+    jobs:
+      - lint
+      - test:
+          matrix:
+            parameters:
+              version: ["1.16", "1.17", "1.18", "1.19"]
