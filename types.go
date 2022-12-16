@@ -1,6 +1,7 @@
 package employmenthero
 
 import (
+	"io"
 	"net/http"
 	"time"
 )
@@ -18,6 +19,7 @@ type (
 		OAuthBase      string
 		Client         HTTPClient
 		Token          *TokenResponse
+		Log            io.Writer
 		tokenExpiresAt time.Time
 	}
 
