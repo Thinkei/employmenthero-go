@@ -33,6 +33,12 @@ jobs:
           name: Run go test
           command:  |
             make test
+  coverage:
+    docker:
+      - image: cimg/go:1.18.4
+    steps:
+      - checkout
+      - run: make coverage && make coveralls
 
 workflows:
   version: 2
@@ -43,3 +49,6 @@ workflows:
           matrix:
             parameters:
               version: ["1.16", "1.17", "1.18", "1.19"]
+      - coverage:
+          requires:
+            - test
