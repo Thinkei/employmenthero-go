@@ -40,6 +40,7 @@ import "github.com/Thinkei/employmenthero-go"
 
 // Create a client instance
 c, err := employmenthero.NewClient("clientID", "secretID", "refreshToken", "OAuthHost", "apiHost")
+c.SetLog(os.Stdout) // Set log to terminal stdout
 
 accessToken, err := c.GetAccessToken(context.TODO())
 ```
