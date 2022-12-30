@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestListPolicy(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id": "1d25a390-7b0e-0135-0209", "name": "Wonderful Company - Full-Disk Encryption Policy", "induction": true, "created_at": "2017-09-14T10:03:51+10:00"}],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
 

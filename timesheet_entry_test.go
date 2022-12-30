@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestListTimesheetEntries(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id":"0f551b48-c958-4359-87c2","employee_id":"9e080b45-244f-4fbd-88d1","date":"2020-12-03T00:00:00+00:00","start_time":null,"end_time":null,"status":"approved","units":5.0,"reason":null,"comment":"h","time":18000,"cost_centre":{"id":"e9a4df80-5d05-444b-ab09","name":"Hoa's Bakery"}}],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
 

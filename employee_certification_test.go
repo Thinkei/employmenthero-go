@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestListEmployeeCertification(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id": "3128a2bb-2b34-4437-9a00", "name": "Full-disk encryption", "certification_id": "6538a2bb-2b34-4437-9a00", "type": "Check", "expiry_date": "2021-01-04T00:00:00+00:00", "completion_date": "2020-01-04T00:00:00+00:00", "driver_problem": false, "driver_details": "", "status": "Outstanding", "reason": "" }],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
 

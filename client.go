@@ -13,16 +13,16 @@ import (
 )
 
 // NewClient returns a new Client struct
-func NewClient(clientID, secret, refreshToken, OAuthBase, APIBase string) (*Client, error) {
-	if clientID == "" || secret == "" || APIBase == "" || OAuthBase == "" || refreshToken == "" {
-		return nil, errors.New("Client ID, Secret and APIBase are required to create a Client")
+func NewClient(clientID, secret, redirectUri, OAuthBase, APIBase string) (*Client, error) {
+	if clientID == "" || secret == "" || APIBase == "" || OAuthBase == "" || redirectUri == "" {
+		return nil, errors.New("Client ID, Secret, RedirectURI, OAuthBase and APIBase are required to create a Client")
 	}
 
 	return &Client{
 		Client:   &http.Client{},
 		ClientID: clientID,
+		RedirectURI: redirectUri,
 		Secret:   secret,
-		Token:    &TokenResponse{RefreshToken: refreshToken},
 		APIBase:  APIBase,
 		OAuthBase:  OAuthBase,
 	}, nil
@@ -31,6 +31,38 @@ func NewClient(clientID, secret, refreshToken, OAuthBase, APIBase string) (*Clie
 // SetLog will set/change the output destination.
 func (c *Client) SetLog(log io.Writer) {
 	c.Log = log
+}
+
+func (c *Client) GetOAuth2Access(ctx context.Context, code string) (*TokenResponse, error) {
+	data := url.Values{}
+	data.Set("client_id", c.ClientID)
+	data.Set("client_secret", c.Secret)
+	data.Set("code", code)
+	data.Set("redirect_uri", "https://google.com/callbacck")
+	data.Set("grant_type", "authorization_code")
+
+	buf := bytes.NewBuffer([]byte(data.Encode()))
+	req, err := http.NewRequestWithContext(ctx, "POST", fmt.Sprintf("%s%s", c.OAuthBase, "/oauth2/token"), buf)
+	if err != nil {
+		return &TokenResponse{}, err
+	}
+
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	response := &TokenResponse{}
+
+	err = c.Send(req, response)
+
+	if response.Token != "" {
+		c.Token = response
+		c.tokenExpiresAt = time.Now().Add(time.Duration(response.ExpiresIn) * time.Second)
+	}
+
+	return response, err
+}
+
+func (c *Client) SetRefreshToken(refreshToken string) {
+	c.Token = &TokenResponse{RefreshToken: refreshToken}
 }
 
 func (c *Client) GetAccessToken(ctx context.Context) (*TokenResponse, error) {
@@ -55,7 +87,6 @@ func (c *Client) GetAccessToken(ctx context.Context) (*TokenResponse, error) {
 	if response.Token != "" {
 		c.Token = response
 		c.tokenExpiresAt = time.Now().Add(time.Duration(response.ExpiresIn) * time.Second)
-		fmt.Println(c.tokenExpiresAt)
 	}
 
 	return response, err
@@ -141,7 +172,7 @@ func (c *Client) log(r *http.Request, resp *http.Response) {
 	)
 
 	if r != nil {
-		reqDump = fmt.Sprintf("%s %s. Data: %s", r.Method, r.URL.String(), r.Form.Encode())
+		reqDump = fmt.Sprintf("%s %s", r.Method, r.URL.String())
 	}
 
 	c.Log.Write([]byte(fmt.Sprintf("Request: %s\nResponse: %s\n", reqDump, string(respDump))))

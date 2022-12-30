@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestListPayslips(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id": "e27387ba-2105-4d12-be95", "first_name": "Daniel", "last_name": "Nguyen", "total_deduction": null, "net_pay": 2520.15, "super": 301.15, "wages": 3346.15, "reimbursements": null, "tax": 826.0, "name": "Alex Kopczynski", "address_line1": "4 Sava", "address_line2": null, "suburb": "123 sydney", "postcode": "0880", "post_tax_deduction": 0.0, "pre_tax_deduction": 0.0, "base_rate": 87000.0, "hourly_rate": 0.0, "base_rate_unit": "Annually", "employment_type": "Annually", "payment_date": "2012-07-11T00:00:00+10:00"}],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
 

@@ -39,10 +39,26 @@ go get -u github.com/Thinkei/employmenthero-go
 import "github.com/Thinkei/employmenthero-go"
 
 // Create a client instance
-c, err := employmenthero.NewClient("clientID", "secretID", "refreshToken", "OAuthHost", "apiHost")
+c, err := employmenthero.NewClient("clientID", "secretID", "redirectUri", "OAuthHost", "apiHost")
 c.SetLog(os.Stdout) // Set log to terminal stdout
 
-accessToken, err := c.GetAccessToken(context.TODO())
+// Get Authorization code and then use it to get the EH OAuth2 Access tokens
+authroizationCode = "<authorizationCode>"
+responseToken, err := client.GetOAuth2Access(ctx, authorizationCode)
+
+// Save the refresh_token to anywhere you want,
+// but use it when you call other APIs to get our resources
+refreshToken := responseToken.RefreshToken
+c.SetRefreshToken(responseToken.RefreshToken)
+
+// call other APIs
+organisationsResp, err := client.ListOrganisations(ctx, employmenthero.ListParams{})
+
+if err != nil {
+	fmt.Printf("Get Organisation failed - %s", err)
+}
+
+fmt.Println(organisationsResp.Data.Items)
 ```
 
 ### List Organisations

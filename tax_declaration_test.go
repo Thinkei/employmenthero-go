@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestGetTaxDeclaration(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"first_name":"www","last_name":"www","tax_file_number":"000000000","tax_au_resident":false,"tax_foreign_resident":true,"working_holiday_maker":false,"tax_free":false,"tax_help_debt":false,"tax_financial_supplement_debt":false}}`)))
 
