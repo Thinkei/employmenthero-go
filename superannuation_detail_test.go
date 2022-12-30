@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestGetSuperannuationDetail(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"fund_name": "SUPER Super", "member_number": "184752", "product_code": "29400111", "employer_nominated_fund": true, "fund_abn": "19905421111", "electronic_service_address": "CLICKSUPER", "fund_email": "some_email@email.com", "account_name": "Daniel", "account_bsb": "HST011xxx", "account_number": "25767731xxx"}}`)))
 

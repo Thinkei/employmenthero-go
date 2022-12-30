@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestListBankAccounts(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id": "883280d7-470c-42e0-83b2", "account_name":"peter","account_number":"000000000","bsb":"012345","amount":"0.0","primary_account":true}],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
 

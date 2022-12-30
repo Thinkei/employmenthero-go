@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestListLeaveRequest(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id":"51c4b9c6-1ca5-4d72-8f75-6bb3a6xxxx","start_date":"2020-12-22T00:00:00+00:00","end_date":"2021-01-08T00:00:00+00:00","total_hours":83.6,"comment":"","status":"Declined","leave_balance_amount":0.0,"leave_category_name":"Annual Leave","reason":"test","employee_id":"xxxx-yyyyy"}],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
 

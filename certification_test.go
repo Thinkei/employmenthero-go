@@ -11,11 +11,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func init() {
-	c, _ = NewClient(testClientID, testSecret, refreshToken, oauthBase, apiBase)
-	c.Client = &mocks.MockHttpClient{}
-}
-
 func TestListCerification(t *testing.T) {
 	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id": "6538a2bb-2b34-4437-9a00-92af3dab5b59", "name": "Full-disk encryption", "type": "check" }],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
 
