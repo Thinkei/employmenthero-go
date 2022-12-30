@@ -38,3 +38,26 @@ func TestListTeams(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+func TestListEmployeesByTeam(t *testing.T) {
+	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"items":[{"id":"51c4b9c6-1ca5-4d72-8f75-6bb3a6xxxx"}],"item_per_page":20,"page_index":1,"total_pages":1,"total_items":1}}`)))
+
+	mocks.GetDoFunc = func(*http.Request) (*http.Response, error) {
+		return &http.Response{
+			StatusCode: 200,
+			Body:       r,
+		}, nil
+	}
+
+	response, err := c.ListEmployeesByTeam(context.TODO(), "organisation_uid", "team_uid", ListParams{})
+
+	assert.Equal(t, response.Data.ItemPerPage, 20)
+	assert.Equal(t, response.Data.PageIndex, 1)
+	assert.Equal(t, response.Data.TotalItems, 1)
+	assert.Equal(t, response.Data.TotalPages, 1)
+	expectedResult := []Employee{{Id: "51c4b9c6-1ca5-4d72-8f75-6bb3a6xxxx"}}
+
+	assert.Equal(t, response.Data.Items, expectedResult)
+
+	assert.Nil(t, err)
+}

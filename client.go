@@ -123,7 +123,6 @@ func (c *Client) NewRequest(ctx context.Context, method, url string, payload int
 	var buf io.Reader
 	if payload != nil {
 		b, err := json.Marshal(&payload)
-		fmt.Println(payload)
 		if err != nil {
 			return nil, err
 		}

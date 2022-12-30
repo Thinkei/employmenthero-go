@@ -38,3 +38,22 @@ func TestListEmployees(t *testing.T) {
 
 	assert.Nil(t, err)
 }
+
+func TestGetEmployee(t *testing.T) {
+	r := ioutil.NopCloser(bytes.NewReader([]byte(`{"data":{"id":"3cfd1633-4920-xxxy-be7e-98i13159x74"}}`)))
+
+	mocks.GetDoFunc = func(*http.Request) (*http.Response, error) {
+		return &http.Response{
+			StatusCode: 200,
+			Body:       r,
+		}, nil
+	}
+
+	response, err := c.GetEmployee(context.TODO(), "organisation_uid", "employee_uid")
+
+	expectedResult := Employee{Id: "3cfd1633-4920-xxxy-be7e-98i13159x74"}
+
+	assert.Equal(t, response.Data, expectedResult)
+
+	assert.Nil(t, err)
+}
