@@ -7,15 +7,23 @@ import (
 )
 
 const (
-	RequestNewTokenBeforeExpiresIn = time.Duration(60) * time.Second
+	RequestNewTokenBeforeExpiresIn = time.Duration(60) * time.Second // The TTL (Time To Live) of the access token
+
 )
 
 type (
+	// A Client is an entry point of this package, it includes all needded configurations
+	// and functions that we need to call EmploymentHero Apis
 	Client struct {
-		ClientID       string
-		Secret         string
-		RedirectURI    string
-		APIBase        string
+		// ClientID is a unique string representing the registration OAuth 2.0 application.
+		ClientID string
+		// Secret is a random secret used by client to authenticate to the Employment Hero Authorisation Server.
+		Secret string
+		// RedirectURI is one of your specified redirect url(s) in your OAuth 2.0 application
+		RedirectURI string
+		// The host of RESTful EmploymentHero API - https://api.employmenthero.com
+		APIBase string
+		// The host of OAuth2 EmploymentHero API - https://oauth.employmenthero.com
 		OAuthBase      string
 		Client         HTTPClient
 		Token          *TokenResponse
@@ -23,6 +31,7 @@ type (
 		tokenExpiresAt time.Time
 	}
 
+	// A response object sent from /oauth/token API wich
 	TokenResponse struct {
 		RefreshToken string `json:"refresh_token"`
 		Token        string `json:"access_token"`
@@ -30,6 +39,7 @@ type (
 		ExpiresIn    int    `json:"expires_in"`
 	}
 
+	// Reason for the failure.
 	ErrorResponse struct {
 		Response *http.Response
 	}
@@ -50,16 +60,21 @@ type (
 		TotalItems  int `json:"total_items"`
 	}
 
+	// Organisation is an object of one Organisation resource in EH system.
+	// It must be managed by you or the organisation which you work for.
 	Organisation struct {
-		Id      string `json:"id"`
+		Id      string `json:"id"` // Unique identifier for the object. (UUID format)
 		Name    string `json:"name"`
 		Phone   string `json:"phone"`
 		Country string `json:"country"`
 		LogoURL string `json:"logo_url"`
 	}
 
+	// OrganisationDetail is the details of one Organisation resource in EH system.
+	// It must be managed by you or the organisation which you work for.
+	// [Organistaion Example]: https://developer.employmenthero.com/api-references/#the-organisation-object
 	OrganisationDetail struct {
-		Id                    string   `json:"id"`
+		Id                    string   `json:"id"` // Unique identifier for the object. (UUID format)
 		Name                  string   `json:"name"`
 		Phone                 string   `json:"phone"`
 		Country               string   `json:"country"`
@@ -82,8 +97,10 @@ type (
 		Name string `json:"name"`
 	}
 
+	// Employee is the details of one Employee resource in EH system.
+	// [Employee Example]: https://developer.employmenthero.com/api-references/#the-employee-object
 	Employee struct {
-		Id                   string      `json:"id"`
+		Id                   string      `json:"id"` // Unique identifier for the object. (UUID format)
 		AccountEmail         string      `json:"account_email"`
 		Title                string      `json:"title"`
 		Role                 string      `json:"role"`
@@ -117,8 +134,10 @@ type (
 		ExternalId           string      `json:"external_id"`
 	}
 
+	// LeaveRequest is the details of one LeaveRequest resource in EH system.
+	// [LeaveRequest Example]: https://developer.employmenthero.com/api-references/#the-leave-request-object
 	LeaveRequest struct {
-		Id                 string  `json:"id"`
+		Id                 string  `json:"id"` // Unique identifier for the object. (UUID format)
 		StartDate          string  `json:"start_date"`
 		EndDate            string  `json:"end_date"`
 		TotalHours         float32 `json:"total_hours"`
@@ -130,8 +149,10 @@ type (
 		EmployeeId         string  `json:"employee_id"`
 	}
 
+	// Timesheet is the details of one TimesheetEntry resource in EH system.
+	// [TimesheetEntry Example]: https://developer.employmenthero.com/api-references/#the-timesheet-object
 	Timesheet struct {
-		Id         string    `json:"id"`
+		Id         string    `json:"id"` // Unique identifier for the object. (UUID format)
 		EmployeeId string    `json:"employee_id"`
 		Date       string    `json:"date"`
 		StartTime  string    `json:"start_time"`
@@ -144,16 +165,20 @@ type (
 		CostCentre BasicData `json:"cost_centre"`
 	}
 
+	// EmploymentHistory is the details of one employment history resource in EH system.
+	// [EmploymentHistory Example]: https://developer.employmenthero.com/api-references/#the-employment-history-object
 	EmploymentHistory struct {
-		Id             string `json:"id"`
+		Id             string `json:"id"` // Unique identifier for the object. (UUID format)
 		Title          string `json:"title"`
 		StartDate      string `json:"start_date"`
 		EndDate        string `json:"end_date"`
 		EmploymentType string `json:"employment_type"`
 	}
 
+	// EmergencyContact is the details of one EmergencyContact resource in EH system.
+	// [EmergencyContact Example]: https://developer.employmenthero.com/api-references/#the-emergency-contact-object
 	EmergencyContact struct {
-		Id                   int    `json:"id"`
+		Id                   int    `json:"id"` // Unique identifier for the object. (Integer)
 		ContactName          string `json:"contact_name"`
 		DaytimeContactNumber string `json:"daytime_contact_number"`
 		AfterHoursNo         string `json:"after_hours_no"`
@@ -162,14 +187,18 @@ type (
 		ContactType          string `json:"contact_type"`
 	}
 
+	// Team is the details of one Team resource in EH system.
+	// [Team Example]: https://developer.employmenthero.com/api-references/#the-team-object
 	Team struct {
-		Id     string `json:"id"`
+		Id     string `json:"id"` // Unique identifier for the object. (UUID format)
 		Name   string `json:"name"`
 		Status string `json:"status"`
 	}
 
+	// BankAccount is the details of one BankAccount resource in EH system.
+	// [BankAccount Example]: https://developer.employmenthero.com/api-references/#the-bank-account-object
 	BankAccount struct {
-		Id             string `json:"id"`
+		Id             string `json:"id"` // Unique identifier for the object. (UUID format)
 		AccountName    string `json:"account_name"`
 		AccountNumber  string `json:"account_number"`
 		Bsb            string `json:"bsb"`
@@ -177,6 +206,8 @@ type (
 		PrimaryAccount bool   `json:"primary_account"`
 	}
 
+	// TaxDeclaration is the details of one TaxDeclaration resource in EH system.
+	// [TaxDeclaration Example]: https://developer.employmenthero.com/api-references/#the-tax-declaration-object
 	TaxDeclaration struct {
 		FirstName                  string `json:"first_name"`
 		LastName                   string `json:"last_name"`
@@ -189,6 +220,8 @@ type (
 		TaxFinancialSupplementDebt bool   `json:"tax_financial_supplement_debt"`
 	}
 
+	// SuperannuationDetail is the details of one SuperannuationDetail resource in EH system.
+	// [SuperannuationDetail Example]: https://developer.employmenthero.com/api-references/#the-superannuation-detail-object
 	SuperannuationDetail struct {
 		FundName                 string `json:"fund_name"`
 		MemberNumber             string `json:"member_number"`
@@ -202,8 +235,10 @@ type (
 		AccountNumber            string `json:"account_number"`
 	}
 
+	// PayDetail is the details of one PayDetail resource in EH system.
+	// [PayDetail Example]: https://developer.employmenthero.com/api-references/#the-pay-detail-object
 	PayDetail struct {
-		Id                     string  `json:"id"`
+		Id                     string  `json:"id"` // Unique identifier for the object. (UUID format)
 		EffectiveFrom          string  `json:"effective_from"`
 		Classification         string  `json:"classification"`
 		IndustrialInstrument   string  `json:"industrial_instrument"`
@@ -218,14 +253,18 @@ type (
 		Comments               string  `json:"comments"`
 	}
 
+	// Certification is the details of one Certification resource in EH system.
+	// [Certification Example]: https://developer.employmenthero.com/api-references/#the-certification-object
 	Certification struct {
-		Id   string `json:"id"`
+		Id   string `json:"id"` // Unique identifier for the object. (UUID format)
 		Name string `json:"name"`
 		Type string `json:"type"`
 	}
 
+	// EmployeeCertification is the details of one Certification resource of one employee in EH system
+	// [EmployeeCertification Example]: https://developer.employmenthero.com/api-references/#the-employee-certification-object
 	EmployeeCertification struct {
-		Id              string `json:"id"`
+		Id              string `json:"id"` // Unique identifier for the object. (UUID format)
 		Name            string `json:"name"`
 		CertificationId string `json:"certification_id"`
 		Type            string `json:"type"`
@@ -237,15 +276,19 @@ type (
 		Reason          string `json:"reason"`
 	}
 
+	// Policy is the details of one Policy resource in EH system
+	// [Policy Example]: https://developer.employmenthero.com/api-references/#get-policies
 	Policy struct {
-		Id        string `json:"id"`
+		Id        string `json:"id"` // Unique identifier for the object. (UUID format)
 		Name      string `json:"name"`
 		Induction bool   `json:"induction"`
 		CreatedAt string `json:"created_at"`
 	}
 
+	// Payslip is the details of one Payslip resource in EH system
+	// [Payslip Example]: https://developer.employmenthero.com/api-references/#the-payslip-object
 	Payslip struct {
-		Id               string  `json:"id"`
+		Id               string  `json:"id"` // Unique identifier for the object. (UUID format)
 		FirstName        string  `json:"first_name"`
 		LastName         string  `json:"last_name"`
 		TotalDeduction   int     `json:"total_deduction"`

@@ -15,6 +15,12 @@ type PolicyListResponse struct {
 	Data PolicyListData `json:"data"`
 }
 
+// Get returns a list of [Policy] resources
+//
+// Example:
+//
+//	response, err := c.ListPolicies(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", ListParams{})
+//	policies := response.Data.Items
 func (c *Client) ListPolicies(ctx context.Context, oid string, tp ListParams) (*PolicyListResponse, error) {
 	req, err := c.NewRequest(ctx, http.MethodGet, fmt.Sprintf("%s/api/v1/organisations/%s/policies", c.APIBase, oid), nil)
 
@@ -31,4 +37,3 @@ func (c *Client) ListPolicies(ctx context.Context, oid string, tp ListParams) (*
 	err = c.SendWithAuth(req, response)
 	return response, err
 }
-
