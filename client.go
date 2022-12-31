@@ -1,3 +1,7 @@
+// Package employmenthero provides the binding for EmploymentHero REST APIs.
+//
+// [API documentation]: https://developer.employmenthero.com/api-references
+// [ISSUES]: https://github.com/Thinkei/employmenthero-go/issues/new/choose
 package employmenthero
 
 import (
@@ -19,12 +23,12 @@ func NewClient(clientID, secret, redirectUri, OAuthBase, APIBase string) (*Clien
 	}
 
 	return &Client{
-		Client:   &http.Client{},
-		ClientID: clientID,
+		Client:      &http.Client{},
+		ClientID:    clientID,
 		RedirectURI: redirectUri,
-		Secret:   secret,
-		APIBase:  APIBase,
-		OAuthBase:  OAuthBase,
+		Secret:      secret,
+		APIBase:     APIBase,
+		OAuthBase:   OAuthBase,
 	}, nil
 }
 
@@ -33,6 +37,11 @@ func (c *Client) SetLog(log io.Writer) {
 	c.Log = log
 }
 
+// GetOAuth2Access will call a HTTP request to EH OAuth server to authenticate with the input authorization code.
+// If the API call is succeed, GetOAuth2Access will set the response into Token filed of the current [Client] instance
+//
+// A successful GetOAuth2Access returns err == nil and a [TokenResponse]
+// A failed GetOAuth2Access returns an error and [TokenResponse] == nil
 func (c *Client) GetOAuth2Access(ctx context.Context, code string) (*TokenResponse, error) {
 	data := url.Values{}
 	data.Set("client_id", c.ClientID)
@@ -61,6 +70,10 @@ func (c *Client) GetOAuth2Access(ctx context.Context, code string) (*TokenRespon
 	return response, err
 }
 
+// SetRefreshToken will set/change the refreshToken value of the current client instance
+//
+// It will re-initialize the [Token] value of [Client] and wipe out the old Token values
+// that includes `ExpiresIn`, `AccessToken`, `RefreshToken`
 func (c *Client) SetRefreshToken(refreshToken string) {
 	c.Token = &TokenResponse{RefreshToken: refreshToken}
 }
@@ -150,6 +163,7 @@ func (c *Client) SendWithAuth(req *http.Request, v interface{}) error {
 	return c.Send(req, v)
 }
 
+// NewRequest helps us build a http request with [context.Context]
 func (c *Client) NewRequest(ctx context.Context, method, url string, payload interface{}) (*http.Request, error) {
 	var buf io.Reader
 	if payload != nil {
@@ -164,10 +178,12 @@ func (c *Client) NewRequest(ctx context.Context, method, url string, payload int
 }
 
 func (c *Client) log(r *http.Request, resp *http.Response) {
-	if c.Log == nil { return }
+	if c.Log == nil {
+		return
+	}
 
 	var (
-		reqDump string
+		reqDump  string
 		respDump []byte
 	)
 
@@ -177,4 +193,3 @@ func (c *Client) log(r *http.Request, resp *http.Response) {
 
 	c.Log.Write([]byte(fmt.Sprintf("Request: %s\nResponse: %s\n", reqDump, string(respDump))))
 }
-

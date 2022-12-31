@@ -41,7 +41,7 @@ func TestGetAccessTokenInvalidClientResponse(t *testing.T) {
 	mocks.GetDoFunc = func(*http.Request) (*http.Response, error) {
 		return &http.Response{
 			StatusCode: 400,
-			Body: r,
+			Body:       r,
 		}, nil
 	}
 	c.SetRefreshToken("refresh_token")
@@ -58,7 +58,7 @@ func TestGetAccessTokenSuccess(t *testing.T) {
 	mocks.GetDoFunc = func(*http.Request) (*http.Response, error) {
 		return &http.Response{
 			StatusCode: 200,
-			Body: r,
+			Body:       r,
 		}, nil
 	}
 	c.SetRefreshToken("refresh_token")
@@ -77,7 +77,7 @@ func TestGetOAuth2Access(t *testing.T) {
 	mocks.GetDoFunc = func(*http.Request) (*http.Response, error) {
 		return &http.Response{
 			StatusCode: 200,
-			Body: r,
+			Body:       r,
 		}, nil
 	}
 	c.SetRefreshToken("refresh_token")

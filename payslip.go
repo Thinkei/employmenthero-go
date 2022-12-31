@@ -15,6 +15,12 @@ type PayslipListReponse struct {
 	Data PayslipList `json:"data"`
 }
 
+// Get returns a list of [Payslip] resources
+//
+// Example:
+//
+//	response, err := c.ListPayslips(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+//	payslips := response.Data.Items
 func (c *Client) ListPayslips(ctx context.Context, oid string, eid string, hp ListParams) (*PayslipListReponse, error) {
 	req, err := c.NewRequest(ctx, http.MethodGet, fmt.Sprintf("%s/api/v1/organisations/%s/employees/%s/payslips", c.APIBase, oid, eid), nil)
 
@@ -31,4 +37,3 @@ func (c *Client) ListPayslips(ctx context.Context, oid string, eid string, hp Li
 	err = c.SendWithAuth(req, response)
 	return response, err
 }
-

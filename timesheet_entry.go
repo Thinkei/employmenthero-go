@@ -15,6 +15,12 @@ type TimesheetListResponse struct {
 	Data TimesheetListData `json:"data"`
 }
 
+// Get returns a list of [TimehseetEntry] resources
+//
+// Example:
+//
+//	response, err := c.ListTimesheetEntries(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "-", ListParams{})
+//	timesheetEntries := response.Data.Items
 func (c *Client) ListTimesheetEntries(ctx context.Context, oid string, eid string, tp ListParams) (*TimesheetListResponse, error) {
 	req, err := c.NewRequest(ctx, http.MethodGet, fmt.Sprintf("%s/api/v1/organisations/%s/employees/%s/timesheet_entries", c.APIBase, oid, eid), nil)
 
@@ -31,4 +37,3 @@ func (c *Client) ListTimesheetEntries(ctx context.Context, oid string, eid strin
 	err = c.SendWithAuth(req, response)
 	return response, err
 }
-

@@ -28,19 +28,18 @@ func TestListEmployeeCertification(t *testing.T) {
 	assert.Equal(t, response.Data.TotalItems, 1)
 	assert.Equal(t, response.Data.TotalPages, 1)
 	expectedResult := []EmployeeCertification{{
-		Id: "3128a2bb-2b34-4437-9a00",
-		Name: "Full-disk encryption",
+		Id:              "3128a2bb-2b34-4437-9a00",
+		Name:            "Full-disk encryption",
 		CertificationId: "6538a2bb-2b34-4437-9a00",
-		Type: "Check",
-		ExpiryDate: "2021-01-04T00:00:00+00:00",
-		CompletionDate: "2020-01-04T00:00:00+00:00",
-		DriverProblem: false,
-		Status: "Outstanding",
-		Reason: "",
+		Type:            "Check",
+		ExpiryDate:      "2021-01-04T00:00:00+00:00",
+		CompletionDate:  "2020-01-04T00:00:00+00:00",
+		DriverProblem:   false,
+		Status:          "Outstanding",
+		Reason:          "",
 	}}
 
 	assert.Equal(t, response.Data.Items, expectedResult)
 
 	assert.Nil(t, err)
 }
-

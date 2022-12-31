@@ -33,4 +33,3 @@ func TestListPolicy(t *testing.T) {
 
 	assert.Nil(t, err)
 }
-

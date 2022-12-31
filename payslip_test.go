@@ -28,31 +28,30 @@ func TestListPayslips(t *testing.T) {
 	assert.Equal(t, response.Data.TotalItems, 1)
 	assert.Equal(t, response.Data.TotalPages, 1)
 	expectedResult := []Payslip{{
-		Id: "e27387ba-2105-4d12-be95",
-		FirstName: "Daniel",
-		LastName: "Nguyen",
-		TotalDeduction: 0.0,
-		NetPay: 2520.15,
-		Super: 301.15,
-		Wages: 3346.15,
-		Reimbursements: 0.0,
-		Tax: 826.0,
-		Name: "Alex Kopczynski",
-		AddressLine1: "4 Sava",
-		AddressLine2: "",
-		Suburb: "123 sydney",
-		Postcode: "0880",
+		Id:               "e27387ba-2105-4d12-be95",
+		FirstName:        "Daniel",
+		LastName:         "Nguyen",
+		TotalDeduction:   0.0,
+		NetPay:           2520.15,
+		Super:            301.15,
+		Wages:            3346.15,
+		Reimbursements:   0.0,
+		Tax:              826.0,
+		Name:             "Alex Kopczynski",
+		AddressLine1:     "4 Sava",
+		AddressLine2:     "",
+		Suburb:           "123 sydney",
+		Postcode:         "0880",
 		PostTaxDeduction: 0.0,
-		PreTaxDeduction: 0.0,
-		BaseRate: 87000.0,
-		HourlyRate: 0.0,
-		BaseRateUnit: "Annually",
-		EmploymentType: "Annually",
-		PaymentDate: "2012-07-11T00:00:00+10:00",
+		PreTaxDeduction:  0.0,
+		BaseRate:         87000.0,
+		HourlyRate:       0.0,
+		BaseRateUnit:     "Annually",
+		EmploymentType:   "Annually",
+		PaymentDate:      "2012-07-11T00:00:00+10:00",
 	}}
 
 	assert.Equal(t, response.Data.Items, expectedResult)
 
 	assert.Nil(t, err)
 }
-

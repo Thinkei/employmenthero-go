@@ -33,4 +33,3 @@ func TestListEmploymentHistories(t *testing.T) {
 
 	assert.Nil(t, err)
 }
-

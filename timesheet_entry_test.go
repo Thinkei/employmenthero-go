@@ -27,10 +27,9 @@ func TestListTimesheetEntries(t *testing.T) {
 	assert.Equal(t, response.Data.PageIndex, 1)
 	assert.Equal(t, response.Data.TotalItems, 1)
 	assert.Equal(t, response.Data.TotalPages, 1)
-	expectedResult := []Timesheet{{Id: "0f551b48-c958-4359-87c2", EmployeeId: "9e080b45-244f-4fbd-88d1", Date: "2020-12-03T00:00:00+00:00", StartTime: "", EndTime: "", Comment: "h", Reason: "", Time: 18000, CostCentre: BasicData{ Id: "e9a4df80-5d05-444b-ab09", Name: "Hoa's Bakery" }, Status: "approved", Units: 5.0 }}
+	expectedResult := []Timesheet{{Id: "0f551b48-c958-4359-87c2", EmployeeId: "9e080b45-244f-4fbd-88d1", Date: "2020-12-03T00:00:00+00:00", StartTime: "", EndTime: "", Comment: "h", Reason: "", Time: 18000, CostCentre: BasicData{Id: "e9a4df80-5d05-444b-ab09", Name: "Hoa's Bakery"}, Status: "approved", Units: 5.0}}
 
 	assert.Equal(t, response.Data.Items, expectedResult)
 
 	assert.Nil(t, err)
 }
-

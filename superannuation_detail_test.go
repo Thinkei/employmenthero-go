@@ -24,20 +24,19 @@ func TestGetSuperannuationDetail(t *testing.T) {
 	response, err := c.GetSuperannuationDetail(context.TODO(), "organisation_uid", "xxx-yy", ListParams{})
 
 	expectedResult := SuperannuationDetail{
-		FundName: "SUPER Super",
-		MemberNumber: "184752",
-		ProductCode: "29400111",
-		EmployerNominatedFund: true,
-		FundAbn: "19905421111",
+		FundName:                 "SUPER Super",
+		MemberNumber:             "184752",
+		ProductCode:              "29400111",
+		EmployerNominatedFund:    true,
+		FundAbn:                  "19905421111",
 		ElectronicServiceAddress: "CLICKSUPER",
-		FundEmail: "some_email@email.com",
-		AccountName: "Daniel",
-		AccountBSB: "HST011xxx",
-		AccountNumber: "25767731xxx",
+		FundEmail:                "some_email@email.com",
+		AccountName:              "Daniel",
+		AccountBSB:               "HST011xxx",
+		AccountNumber:            "25767731xxx",
 	}
 
 	assert.Equal(t, response.Data, expectedResult)
 
 	assert.Nil(t, err)
 }
-

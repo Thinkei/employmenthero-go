@@ -15,6 +15,12 @@ type EmployeeCertificationListResponse struct {
 	Data EmployeeCertificationList `json:"data"`
 }
 
+// Get returns a list of [EmployeeCertification] resources of one employee
+//
+// Example:
+//
+//	response, err := c.ListEmployeeCertifications(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx", "XXX-YY-ZZZ", ListParams{})
+//	employeeCertifications := response.Data.Items
 func (c *Client) ListEmployeeCertifications(ctx context.Context, oid string, eid string, hp ListParams) (*EmployeeCertificationListResponse, error) {
 	req, err := c.NewRequest(ctx, http.MethodGet, fmt.Sprintf("%s/api/v1/organisations/%s/employees/%s/certifications", c.APIBase, oid, eid), nil)
 
@@ -31,4 +37,3 @@ func (c *Client) ListEmployeeCertifications(ctx context.Context, oid string, eid
 	err = c.SendWithAuth(req, response)
 	return response, err
 }
-
