@@ -1,4 +1,4 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Thinkei/employmenthero-go/tree/main.svg?style=svg&circle-token=d250e09ef4000c2bbd8e827fff9d1b36b6dd6cd4)](https://dl.circleci.com/status-badge/redirect/gh/Thinkei/employmenthero-go/tree/main) [![Coverage Status](https://coveralls.io/repos/github/Thinkei/employmenthero-go/badge.svg?branch=main&t=ygC26U)](https://coveralls.io/github/Thinkei/employmenthero-go?branch=main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Thinkei/employmenthero-go/tree/main.svg?style=svg&circle-token=d250e09ef4000c2bbd8e827fff9d1b36b6dd6cd4)](https://dl.circleci.com/status-badge/redirect/gh/Thinkei/employmenthero-go/tree/main) [![Coverage Status](https://coveralls.io/repos/github/Thinkei/employmenthero-go/badge.svg?branch=main&t=ygC26U)](https://coveralls.io/github/Thinkei/employmenthero-go?branch=main) [![Go Reference](https://pkg.go.dev/badge/github.com/Thinkei/employmenthero-go.svg)](https://pkg.go.dev/github.com/Thinkei/employmenthero-go)
 
 # Go client for EmploymentHero REST API
 The official EmploymentHero Go client library.
