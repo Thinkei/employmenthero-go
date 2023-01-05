@@ -33,7 +33,15 @@ Alternatively, you can also explicitly `go get` the package into a project:
 go get -u github.com/Thinkei/employmenthero-go
 ```
 
-## Usage
+## Documentation
+
+For a conprehensive list of examples, check out the [API documentation](https://developer.employmenthero.com/api-references/)
+
+For details on all funtionality in this library, check out the [Go documentation](https://pkg.go.dev/github.com/Thinkei/employmenthero-go)
+
+Below are a few of simple examples:
+
+### Auth
 
 ```go
 import "github.com/Thinkei/employmenthero-go"

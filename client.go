@@ -1,7 +1,3 @@
-// Package employmenthero provides the binding for EmploymentHero REST APIs.
-//
-// [API documentation]: https://developer.employmenthero.com/api-references
-// [ISSUES]: https://github.com/Thinkei/employmenthero-go/issues/new/choose
 package employmenthero
 
 import (
@@ -57,6 +53,7 @@ func (c *Client) GetOAuth2Access(ctx context.Context, code string) (*TokenRespon
 	}
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("User-Agent", fmt.Sprintf("%s/%s", "EH-GO", clientVersion))
 
 	response := &TokenResponse{}
 
@@ -92,6 +89,7 @@ func (c *Client) GetAccessToken(ctx context.Context) (*TokenResponse, error) {
 	}
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("User-Agent", fmt.Sprintf("%s/%s", "EH-GO", clientVersion))
 
 	response := &TokenResponse{}
 
@@ -166,6 +164,9 @@ func (c *Client) SendWithAuth(req *http.Request, v interface{}) error {
 	}
 
 	c.mu.Unlock()
+
+	req.Header.Set("User-Agent", fmt.Sprintf("%s/%s", "EH-GO", clientVersion))
+
 	return c.Send(req, v)
 }
 
@@ -191,11 +192,13 @@ func (c *Client) log(r *http.Request, resp *http.Response) {
 	var (
 		reqDump  string
 		respDump []byte
+		headerDump string
 	)
 
 	if r != nil {
 		reqDump = fmt.Sprintf("%s %s", r.Method, r.URL.String())
+		headerDump = fmt.Sprintf("%s", r.Header)
 	}
 
-	c.Log.Write([]byte(fmt.Sprintf("Request: %s\nResponse: %s\n", reqDump, string(respDump))))
+	c.Log.Write([]byte(fmt.Sprintf("Request: %s\nHeader: %s\nResponse: %s\n", reqDump, headerDump, string(respDump))))
 }
