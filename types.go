@@ -3,6 +3,7 @@ package employmenthero
 import (
 	"io"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type (
 	// A Client is an entry point of this package, it includes all needded configurations
 	// and functions that we need to call EmploymentHero Apis
 	Client struct {
+		// A mutex is used to prevent race condition when re-new or assign token to Client instance
+		mu sync.Mutex
 		// ClientID is a unique string representing the registration OAuth 2.0 application.
 		ClientID string
 		// Secret is a random secret used by client to authenticate to the Employment Hero Authorisation Server.
