@@ -149,7 +149,12 @@ func (c *Client) Send(req *http.Request, v interface{}) error {
 	return json.NewDecoder(resp.Body).Decode(v)
 }
 
+// SendWithAuth send a request to EH Backend with an added header automatically.
+// If an access_token is soon expired, it will try to re-new it before making a new request
+// client.Token will be updated when changed
 func (c *Client) SendWithAuth(req *http.Request, v interface{}) error {
+	c.mu.Lock()
+
 	if c.Token != nil {
 		if !c.tokenExpiresAt.IsZero() && time.Until(c.tokenExpiresAt) < RequestNewTokenBeforeExpiresIn {
 			if _, err := c.GetAccessToken(req.Context()); err != nil {
@@ -160,6 +165,7 @@ func (c *Client) SendWithAuth(req *http.Request, v interface{}) error {
 		req.Header.Set("Authorization", "Bearer "+c.Token.Token)
 	}
 
+	c.mu.Unlock()
 	return c.Send(req, v)
 }
 
