@@ -1,7 +1,23 @@
 
+<a name="v0.0.2"></a>
+## [v0.0.2] - 2023-01-06
+### Chores
+- Add Go package badge to our README file
+
+### Features
+- Add user-agent header to this go module
+- Apply sync.Mutex to prevent the race condition to the client instance
+
+### Pull Requests
+- Merge pull request [#43](https://github.com/Thinkei/employmenthero-go/issues/43) from Thinkei/feat/add-user-agent
+- Merge pull request [#42](https://github.com/Thinkei/employmenthero-go/issues/42) from Thinkei/feat/using-mutex-to-prevent-race-condition-from-client
+- Merge pull request [#41](https://github.com/Thinkei/employmenthero-go/issues/41) from Thinkei/chore/add-go-package-badge
+
+
 <a name="v0.0.1"></a>
 ## v0.0.1 - 2023-01-02
 ### Chores
+- update changelog for v0.0.1
 - Add documentations
 - Update the coverall badge
 - Improve test coverage
@@ -68,3 +84,4 @@
 - Merge pull request [#5](https://github.com/Thinkei/employmenthero-go/issues/5) from Thinkei/ft/organisation-apis
 
 
+[v0.0.2]: https://github.com/Thinkei/employmenthero-go/compare/v0.0.1...v0.0.2
