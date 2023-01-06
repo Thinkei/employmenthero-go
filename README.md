@@ -1,4 +1,4 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Thinkei/employmenthero-go/tree/main.svg?style=svg&circle-token=d250e09ef4000c2bbd8e827fff9d1b36b6dd6cd4)](https://dl.circleci.com/status-badge/redirect/gh/Thinkei/employmenthero-go/tree/main) [![Coverage Status](https://coveralls.io/repos/github/Thinkei/employmenthero-go/badge.svg?branch=main&t=ygC26U)](https://coveralls.io/github/Thinkei/employmenthero-go?branch=main) [![Go Reference](https://pkg.go.dev/badge/github.com/Thinkei/employmenthero-go.svg)](https://pkg.go.dev/github.com/Thinkei/employmenthero-go)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Thinkei/employmenthero-go/tree/main.svg?style=svg&circle-token=d250e09ef4000c2bbd8e827fff9d1b36b6dd6cd4)](https://dl.circleci.com/status-badge/redirect/gh/Thinkei/employmenthero-go/tree/main) [![Coverage Status](https://coveralls.io/repos/github/Thinkei/employmenthero-go/badge.svg?branch=main)](https://coveralls.io/github/Thinkei/employmenthero-go?branch=main) [![Go Reference](https://pkg.go.dev/badge/github.com/Thinkei/employmenthero-go.svg)](https://pkg.go.dev/github.com/Thinkei/employmenthero-go) [![Go Report Card](https://goreportcard.com/badge/github.com/Thinkei/employmenthero-go)](https://goreportcard.com/report/github.com/Thinkei/employmenthero-go)
 
 # Go client for EmploymentHero REST API
 The official EmploymentHero Go client library.
@@ -73,14 +73,14 @@ fmt.Println(organisationsResp.Data.Items)
 
 ```go
 response, err := c.ListOrganisations(context.TODO(), ListParams{})
-organistaions := response.Data.Items
+organisations := response.Data.Items
 ```
 
 ### Get Organisation details
 
 ```go
 response, err := c.GetOrganisation(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx")
-organistaion := response.Data
+organisation := response.Data
 ```
 
 ### List Employees

@@ -34,7 +34,7 @@ type (
 		tokenExpiresAt time.Time
 	}
 
-	// A response object sent from /oauth/token API wich
+	// A response object sent from /oauth/token API which
 	TokenResponse struct {
 		RefreshToken string `json:"refresh_token"`
 		Token        string `json:"access_token"`
@@ -75,7 +75,7 @@ type (
 
 	// OrganisationDetail is the details of one Organisation resource in EH system.
 	// It must be managed by you or the organisation which you work for.
-	// [Organistaion Example]: https://developer.employmenthero.com/api-references/#the-organisation-object
+	// [Organisation Example]: https://developer.employmenthero.com/api-references/#the-organisation-object
 	OrganisationDetail struct {
 		Id                    string   `json:"id"` // Unique identifier for the object. (UUID format)
 		Name                  string   `json:"name"`

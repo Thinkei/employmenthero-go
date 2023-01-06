@@ -20,7 +20,7 @@ type OrganisationListResponse struct {
 // Example:
 //
 //	response, err := c.ListOrganisations(context.TODO(), ListParams{})
-//	organistaions := response.Data.Items
+//	organisations := response.Data.Items
 func (c *Client) ListOrganisations(ctx context.Context, op ListParams) (*OrganisationListResponse, error) {
 	req, err := c.NewRequest(ctx, http.MethodGet, fmt.Sprintf("%s/api/v1/organisations", c.APIBase), nil)
 
@@ -47,7 +47,7 @@ type OrganisationResponse struct {
 // Example:
 //
 //	response, err := c.GetOrganisation(context.TODO(), "90a34ef1-50e4-4930-a9d6-xxxx")
-//	organistaion := response.Data
+//	organisation := response.Data
 func (c *Client) GetOrganisation(ctx context.Context, oid string) (*OrganisationResponse, error) {
 	req, err := c.NewRequest(ctx, http.MethodGet, fmt.Sprintf("%s/api/v1/organisations/%s", c.APIBase, oid), nil)
 
