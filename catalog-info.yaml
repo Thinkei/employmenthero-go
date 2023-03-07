@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: employmenthero-go
+  tags:
+    - external
+    - public
+    - go
+  annotations:
+    github.com/project-slug: Thinkei/employmenthero-go
+spec:
+  type: service
+  system: pre-payroll
+  lifecycle: production
