@@ -1,0 +1,78 @@
+# This file is generate automatically by a platform tool
+# to schedule a sonarqube scan for the repo 
+# You can modify the schedule/events to fit your repo
+
+name: sonarqube-scan
+
+on:
+  create:
+    branches:
+      - sonarqube/config
+
+jobs:
+  scan:
+    name: sonarqube
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install Sonar Scanner CLI
+        run: |
+          SONAR_SCANNER_VERSION="4.8.0.2856"
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION.zip
+          unzip sonar-scanner-cli-$SONAR_SCANNER_VERSION.zip
+          rm -rf sonar-scanner-cli-$SONAR_SCANNER_VERSION.zip
+        env:
+          SONAR_SCANNER_VERSION: ${{ env.SONAR_SCANNER_VERSION || '4.8.0.2856' }}
+
+      - name: Install Wireguard client
+        run: |
+          sudo apt update --fix-missing && sudo apt install -y wireguard resolvconf unzip
+
+      - name: Config Wireguard client
+        run: |
+          EH_WIREGUARD_CONFIG="[Interface]
+          PrivateKey = ${{ secrets.WIREGUARD_PRIVATE_KEY }}
+          Address = ${{ secrets.WIREGUARD_IPS }}
+          MTU = 1420
+          DNS = 10.0.0.2, 1.1.1.1, 1.0.0.1
+          [Peer]
+          PresharedKey = ${{ secrets.WIREGUARD_PRESHARED_KEY }}
+          PublicKey = ${{ secrets.WIREGUARD_ENDPOINT_PUBLIC_KEY }}
+          AllowedIPs = ${{ secrets.WIREGUARD_ALLOWED_IPS }}
+          Endpoint = ${{ secrets.WIREGUARD_ENDPOINT }}
+          PersistentKeepalive = 0"
+          
+          echo -n "$EH_WIREGUARD_CONFIG" | \
+          sed "s/0.0.0.0\/0/$(curl -s https://ifconfig.me)/g" > wg0.conf
+          sudo mkdir -p /etc/wireguard
+          sudo mv wg0.conf /etc/wireguard/wg0.conf
+          sudo chmod 600 /etc/wireguard/wg0.conf
+          sudo cat /etc/wireguard/wg0.conf 
+
+      - name: Bring VPN connection up
+        run: |
+          sudo wg-quick up /etc/wireguard/wg0.conf
+          curl -o /dev/null -s -w "%{http_code}\n" "https://support.staging.ehrocks.com/healthz"
+
+      - name: Run Sonar Scanner
+        run: |
+          ./sonar-scanner-$SONAR_SCANNER_VERSION/bin/sonar-scanner  \
+           -Dsonar.login=$SONAR_KEY \
+        env:
+          SONAR_KEY: ${{ secrets.SONAR_KEY }}
+          SONAR_SCANNER_VERSION: ${{ env.SONAR_SCANNER_VERSION || '4.8.0.2856' }}
+
+      - name: Bring VPN Connection Down
+        run: |
+          sudo wg-quick down /etc/wireguard/wg0.conf || true
+          sudo rm /etc/wireguard/wg0.conf
+
