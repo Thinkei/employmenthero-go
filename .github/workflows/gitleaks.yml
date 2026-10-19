@@ -1,0 +1,19 @@
+name: gitleaks
+on:
+  pull_request:
+  merge_group:
+jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    # Skip when dependabot creates PRs, but allow developers rerun to handle those PRs
+    if: ${{ github.triggering_actor != 'dependabot[bot]' && github.event_name != 'merge_group' }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
